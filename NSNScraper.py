@@ -39,4 +39,25 @@ def log_error(e):
     """
     print(e)
 
-raw_html = open(simple_get("https://neurosciencenews.com/birth-head-changes-14004/")).read()
+
+def news_categories():
+    # Iterate through the news categories and search for articles
+    # categories = ["neuroscience", "open-neuroscience-articles", "neurology", "brain-cancer", "brain-research", "psychology", "genetics", "artificial-intelligence-2", "robotics-2"]
+    categories = ["neuroscience"]
+    nsn_topics = "https://neurosciencenews.com/neuroscience-topics/"
+    for a in categories:
+        search_topic = nsn_topics + a
+        raw_html = simple_get(search_topic)
+        html = BeautifulSoup(raw_html, 'html.parser')
+        for title in html.find_all("h2", class_="cb-post-title"):
+            print (title.text)
+
+
+
+
+news_categories()
+
+# raw_html = simple_get("https://neurosciencenews.com/female-suicide-increase-14026/")
+# html = BeautifulSoup(raw_html, 'html.parser')
+# for p in html.select("div"):
+#     print(p.text)
